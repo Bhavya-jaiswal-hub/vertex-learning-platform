@@ -114,5 +114,70 @@ export function DesignSystem() {
 }
 
 export default function Home() {
-  return <main className="route-home"><div><div className="brand"><Mark /><strong>Vertex</strong></div><h1>Vertex</h1><p>Build and explore focused learning experiences.</p><Link href="/design-system">Open the design system <Icon name="chevron" /></Link></div></main>;
+  const courses = [
+    {
+      kind: "next",
+      title: "Next.js for Production",
+      description: "Build scalable, high-performance web applications with Next.js.",
+      level: "Intermediate",
+      duration: "18h 24m",
+      modules: "12 modules",
+    },
+    {
+      kind: "docker",
+      title: "Docker Essentials",
+      description: "Containerize applications and streamline your development workflow.",
+      level: "Beginner",
+      duration: "10h 12m",
+      modules: "8 modules",
+    },
+    {
+      kind: "typescript",
+      title: "TypeScript Deep Dive",
+      description: "Go beyond the basics and write safer, more expressive code.",
+      level: "Intermediate",
+      duration: "14h 36m",
+      modules: "10 modules",
+    },
+  ];
+
+  return (
+    <main className="vertex-home">
+      <header className="home-header">
+        <Link className="home-brand" href="/" aria-label="Vertex home"><Mark /><strong>Vertex</strong></Link>
+        <nav className="home-nav" aria-label="Primary navigation"><Link href="#courses">Courses</Link><Link href="#learning">My Learning</Link></nav>
+        <div className="home-actions"><button className="notification-button" type="button" aria-label="Notifications"><Icon name="bell" /></button><button className="profile-button" type="button" aria-label="Open profile"><span className="profile-hair" aria-hidden="true" /><span className="profile-face" aria-hidden="true" /><span className="profile-shoulders" aria-hidden="true" /></button></div>
+      </header>
+
+      <section className="home-hero" aria-labelledby="hero-title">
+        <p className="eyebrow">Intelligent learning</p>
+        <h1 id="hero-title">Search your learning<br />in plain English.</h1>
+        <p className="hero-copy">Vertex understands what you want to learn and<br className="desktop-break" /> finds the exact lessons across all your courses.</p>
+        <Link className="explore-button" href="#courses">Explore Courses <Icon name="chevron" /></Link>
+        <form className="learning-search" role="search">
+          <label className="sr-only" htmlFor="learning-query">Search your learning</label>
+          <Icon name="search" />
+          <input id="learning-query" name="query" type="search" placeholder="Ask anything about your learning..." />
+          <kbd aria-hidden="true">⌘ K</kbd>
+        </form>
+      </section>
+
+      <section className="courses-section" id="courses" aria-labelledby="courses-title">
+        <div className="courses-heading"><h2 id="courses-title">All Courses</h2><Link href="#courses">View all courses <Icon name="chevron" /></Link></div>
+        <div className="course-grid">
+          {courses.map((course) => (
+            <article className="course-card" key={course.title}>
+              <div className={`course-image ${course.kind}`} aria-hidden="true"><span>{course.kind === "next" ? "N" : course.kind === "typescript" ? "TS" : "⌁"}</span></div>
+              <h3>{course.title}</h3>
+              <p>{course.description}</p>
+              <div className="course-meta"><span><Icon name="chart" />{course.level}</span><span><Icon name="clock" />{course.duration}</span><span><Icon name="file" />{course.modules}</span></div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="weekly-note" id="learning" aria-label="Course updates"><i /><span aria-hidden="true">☆</span><p>New courses and lessons added every week.</p><i /></section>
+      <div className="coral-sky" aria-hidden="true">{Array.from({ length: 12 }, (_, index) => <i key={index} />)}</div>
+    </main>
+  );
 }
