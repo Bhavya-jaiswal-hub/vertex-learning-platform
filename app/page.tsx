@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 
 const colors = [
@@ -146,7 +147,20 @@ export default function Home() {
       <header className="home-header">
         <Link className="home-brand" href="/" aria-label="Vertex home"><Mark /><strong>Vertex</strong></Link>
         <nav className="home-nav" aria-label="Primary navigation"><Link href="#courses">Courses</Link><Link href="#learning">My Learning</Link></nav>
-        <div className="home-actions"><button className="notification-button" type="button" aria-label="Notifications"><Icon name="bell" /></button><button className="profile-button" type="button" aria-label="Open profile"><span className="profile-hair" aria-hidden="true" /><span className="profile-face" aria-hidden="true" /><span className="profile-shoulders" aria-hidden="true" /></button></div>
+        <div className="home-actions">
+          <button className="notification-button" type="button" aria-label="Notifications"><Icon name="bell" /></button>
+          <Show when="signed-out">
+            <SignInButton>
+              <button className="auth-link" type="button">Sign in</button>
+            </SignInButton>
+            <SignUpButton>
+              <button className="auth-sign-up" type="button">Sign up</button>
+            </SignUpButton>
+          </Show>
+          <Show when="signed-in">
+            <UserButton />
+          </Show>
+        </div>
       </header>
 
       <section className="home-hero" aria-labelledby="hero-title">
