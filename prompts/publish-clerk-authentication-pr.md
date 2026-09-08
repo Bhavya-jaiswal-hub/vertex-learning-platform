@@ -53,7 +53,9 @@ Commit the approved Clerk authentication integration, push it to a dedicated bra
 
 ## Checks to report
 
-- `clerk doctor --json`: all required checks passed; production instance remains optional.
-- `npm.cmd run lint`: passed.
-- `npx.cmd tsc --noEmit`: passed.
-- `npm.cmd run build`: passed.
+Report the actual outcome of each command, including any failures, based on commands actually run by the operator:
+
+- `clerk doctor --json`
+- `npm.cmd run lint`
+- `npx.cmd tsc --noEmit`
+- `npm.cmd run build`
